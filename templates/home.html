@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% load mptt_tags %}
+{% block content %}
+<div class="container">
+  <form action="/" method="post">
+    <div class="row">
+      <!-- left node  -->
+      <div class="col-md-5">
+      <div class="bg-light p-4 mt-3" style="border-radius: 20px;">
+        <h3 class="text-center text-primary">Categories</h3>
+
+        <!-- mptt for category tree -->
+        <ul>
+            {% recursetree tag %}
+                <li>
+                  {{ node.name }}
+                    {% if not node.is_leaf_node %}
+                        <ul class="children">
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endrecursetree %}
+        </ul>
+      </div>
+      </div>
+
+      <!-- right node  -->
+      <div class="col-md-7">
+        <form action="/" method="post">
+          {% csrf_token %}
+          <div class="row p-4 bg-light" style="border-radius: 20px;">
+              <h2 class="text-center text-primary">Form</h2>
+            <div class="col-md-8">
+              <div class="form-group mb-2">
+                <!-- Heading: {{descriptions_Form.title}} -->
+                <label for="header">Heading:</label>
+                {% render_field descriptions_Form.title|attr:'required:true' id="header" class="form-control item" %}
+              </div>
+              <div class="form-group mb-2">
+                <!-- Descriptions: {{descriptions_Form.desc}}  -->
+                <label for="desc">Descriptions:</label>
+                {% render_field descriptions_Form.desc|attr:'required:true' id="desc" class="form-control item" %}
+              </div>
+              <div class="mt-1 mb-2">
+                {% if obj %} Tags: {% for ss in obj.tag.all %}
+                <b>{{ss}}</b>
+              {% endfor %} {% endif %}
+              </div>
+            </div>
+
+              <div class="col-md-4">
+                <h3>Subjects</h3>
+                <!-- {{descriptions_Form.tag}} -->
+                <i>{% render_field descriptions_Form.tag %}</i>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="reset" class="btn btn-danger ms-2">Cancel</button>
+              </div>
+          </div>
+          
+        </form>
+
+        <!-- all descriptions  -->
+        <div class="row my-5">
+          <h3 class="text-center">All Reviews</h3>
+          
+          <div class="col-md-12 mt-2">
+            {% for d in descriptions %}
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-secondary">
+                {% if getid == d.id %}
+                <input hidden type="text" value="{{d.id}}" name="inpt" />
+                {% endif %}
+
+                <div class="row">
+                  <div class="col-9">{{d}}</div>
+                  <div class="col-3">
+                    <a
+                      href="?docid={{d.id}}"
+                      type="submit"
+                      name="edit"
+                      class="btn btn-primary"
+                      >Edit</a
+                    >
+                    <a
+                      href="{% url 'delete_view' d.id %}"
+                      type="submit"
+                      name="Delete"
+                      class="btn btn-danger ms-1"
+                      >Delete</a
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

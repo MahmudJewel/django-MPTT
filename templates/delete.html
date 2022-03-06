@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container ">
+   <div class="row d-flex justify-content-center mt-4">
+      <div class="col-md-6 p-4 bg-danger">
+         <p class="text-center">Confirmation</p>
+      </div>
+   </div>
+   <div class="row d-flex justify-content-center ">
+      <div class="col-md-6 d-flex justify-content-center mt-4">
+         <form method="post">
+            {% csrf_token %}
+            <p class="m-4">Are you sure you want to delete <b>"{{ object }}"?</b></p>
+            <input type="submit" value="Confirm" class="btn btn-primary ms-4">
+            <a href="/" class="btn btn-secondary ms-3">Cancel</a>
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock %}
