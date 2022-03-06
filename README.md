@@ -1,4 +1,4 @@
-﻿# Single Page CRUD with regrouping
+﻿# MPTT
 This task is a part of recruiting junior Django developer.
 In this task We have to make CRUD operation within single page. Many-to-Many relationship and Django regrouping also applied to the task.
 
@@ -18,11 +18,11 @@ Start date of developing: 27-02-22
 
 ## Screenshot
 ### Home Page
-![home page](https://github.com/MahmudJewel/Django-Single_page_CRUD/blob/main/screenshot/AGL-1.png)
+![home page](https://github.com/MahmudJewel/django-MPTT/blob/main/screenshot/1.png)
 ### Edit View
-![home page](https://github.com/MahmudJewel/Django-Single_page_CRUD/blob/main/screenshot/AGL-2.png)
+![home page](https://github.com/MahmudJewel/django-MPTT/blob/main/screenshot/2.png)
 ### Delete confirmation
-![home page](https://github.com/MahmudJewel/Django-Single_page_CRUD/blob/main/screenshot/AGL-3.jpg)
+![home page](https://github.com/MahmudJewel/django-MPTT/blob/main/screenshot/3.jpg)
 
 
 The End
